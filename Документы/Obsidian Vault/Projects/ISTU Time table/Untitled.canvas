@@ -1,7 +1,0 @@
-{
-	"nodes":[
-		{"id":"745498b0cdf53daa","x":-140,"y":-280,"width":250,"height":60,"type":"text","text":"Outer System"},
-		{"id":"4b72bfb2b35e6c40","x":-160,"y":-180,"width":290,"height":160,"type":"text","text":"IAuthorisationTokenChecker\n- GetInfoFromToken\n- RegenerateToken\n- GenerateToken"}
-	],
-	"edges":[]
-}
