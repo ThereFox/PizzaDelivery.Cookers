@@ -6,7 +6,7 @@ namespace PizzaDelivery.Cooking.Domain.Entitys;
 public class Order : Entity<Guid>
 {
     private List<Product> _elements;
-    
+    public OrderState State { get; private set; }
     public string Code { get; }
     public DateTime OrderTime { get; }
     public IReadOnlyCollection<Product> Composition { get; }

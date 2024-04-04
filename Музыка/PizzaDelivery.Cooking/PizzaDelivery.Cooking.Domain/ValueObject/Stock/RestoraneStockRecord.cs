@@ -10,12 +10,12 @@ public class RestoraneStockRecord
 
     public bool CanRealise()
     {
-        
+        return true;
     }
 
     public Result Remove()
     {
-        
+        return Result.Success();
     }
 
     

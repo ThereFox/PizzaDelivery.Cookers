@@ -10,9 +10,14 @@ public class RestoraneStocks
     public IReadOnlyCollection<RestoraneStockRecord> Elements => _elements;
     
     public bool CanRealise(Order order)
-    {}
+    {
+        return true;
+    }
+
     public Result RemoveUsedIngridient(Order order)
-    {}
+    {
+        return Result.Success();
+    }
     
     
 

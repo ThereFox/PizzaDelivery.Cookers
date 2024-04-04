@@ -7,6 +7,7 @@ public class Product : Entity<Guid>
 {
     private List<ProductContaining> _containing;
     
+    public Order Order { get; }
     public Cooker? Creater { get; private set; }
     public ProductCookState State { get; private set; }
     public string Name { get; private set; }
