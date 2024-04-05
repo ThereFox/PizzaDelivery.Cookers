@@ -7,18 +7,18 @@ public class Cooker : Entity<Guid>
 {
     public FullName Name { get; private set; }
     public Restorane Restorane { get; private set; }
-    private Cooker(Guid id, FullName name, Restorane restorane)
+    
+    protected Cooker(Guid id, FullName name, Restorane restorane)
     {
         Id = id;
         Name = name;
         Restorane = restorane;
     }
-
+    
     public static Result<Cooker> Create(Guid id, FullName name, Restorane restorane)
     {
         return Result.Success<Cooker>(new(id, name, restorane));
     }
-
     public Result ChangeRestorane(Restorane restorane)
     {
         if (Restorane.Id == restorane.Id)
@@ -46,5 +46,15 @@ public class Cooker : Entity<Guid>
         Restorane = restorane;
         return Result.Success();
     }
-    
+    public Result ChangeFullName(FullName name)
+    {
+        if (Name == name)
+        {
+            return Result.Failure("nothing to change");
+        }
+
+        Name = name;
+
+        return Result.Success();
+    }
 }

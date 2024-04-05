@@ -40,5 +40,22 @@ public class Order : Entity<Guid>
         return Result.Success(new Order(id, code, orderTime, products));
 
     }
+
+    public Result ChangeState(OrderState newState)
+    {
+        if (State == newState)
+        {
+            return Result.Failure("nothing to change");
+        }
+        
+        if (State.IsSealed())
+        {
+            return Result.Failure("is sealed order");
+        }
+
+        State = newState;
+        
+        return Result.Success();
+    }
     
 }

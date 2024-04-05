@@ -35,7 +35,6 @@ public class Product : Entity<Guid>
         Creater = creater;
         return Result.Success();
     }
-
     public Result ChangeState(ProductCookState newState)
     {
         if (State == ProductCookState.Cooked)
@@ -46,6 +45,7 @@ public class Product : Entity<Guid>
         State = newState;
         return Result.Success();
     }
+
     
     protected Product(Guid id, string name, Cooker cooker, ProductCookState state, List<ProductContaining> containing)
     {

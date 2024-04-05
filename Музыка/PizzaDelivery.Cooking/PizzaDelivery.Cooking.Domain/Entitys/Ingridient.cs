@@ -4,7 +4,7 @@ namespace PizzaDelivery.Cooking.Domain.Entitys;
 
 public class Ingridient : Entity<Guid>
 {
-    public string Name { get; }
+    public string Name { get; private set; }
 
     protected Ingridient(Guid id, string name)
     {
@@ -20,6 +20,18 @@ public class Ingridient : Entity<Guid>
         }
 
         return Result.Success<Ingridient>(new Ingridient(id, name));
+    }
+
+    public Result ChangeName(string newName)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            return Result.Failure("name must be not null or empty");
+        }
+
+        Name = newName;
+        return Result.Success();
+
     }
     
 }

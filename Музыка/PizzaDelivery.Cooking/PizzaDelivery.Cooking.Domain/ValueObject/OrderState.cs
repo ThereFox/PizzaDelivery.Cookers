@@ -9,6 +9,11 @@ public class OrderState : CSharpFunctionalExtensions.ValueObject
     
     public int State { get; }
 
+    public bool IsSealed()
+    {
+        return State == Cooked.State || State == Canceled.State;
+    }
+    
     protected OrderState(int state)
     {
         State = state;
