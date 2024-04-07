@@ -1,4 +1,5 @@
 using App.Interfaces;
+using App.Interfaces.Notificators;
 using CSharpFunctionalExtensions;
 using PizzaDelivery.Cooking.Domain.Entitys;
 using PizzaDelivery.Cooking.Domain.ValueObject;
@@ -8,6 +9,7 @@ namespace App.Services;
 public class OrderServices
 {
     private readonly IOrderStore _orderStore;
+    private readonly IOrderStateNotificator _notificator;
 
     public async Task<Result<Order>> GetById(Guid id)
     {
@@ -36,7 +38,14 @@ public class OrderServices
             return updateStateResult;
         }
 
-        return await _orderStore.SaveChanges(order);
+        var saveChangeResult = await _orderStore.SaveChanges(order);
+
+        if (saveChangeResult.IsFailure)
+        {
+            return saveChangeResult;
+        }
+
+        return await _notificator.NotifyChangeOrderState(order);
     }
     
 }
