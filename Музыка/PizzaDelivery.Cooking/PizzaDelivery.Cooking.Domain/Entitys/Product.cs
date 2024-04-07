@@ -5,26 +5,15 @@ namespace PizzaDelivery.Cooking.Domain.Entitys;
 
 public class Product : Entity<Guid>
 {
-    private List<ProductContaining> _containing;
+    private readonly List<ModificationInfo> _modification;
     
     public Order Order { get; }
     public Cooker? Creater { get; private set; }
     public ProductCookState State { get; private set; }
-    public string Name { get; private set; }
-    public IReadOnlyCollection<ProductContaining> IngridientContaining => _containing;
-
-    public Result ChangeName(string newName)
-    {
-        if (string.IsNullOrWhiteSpace(newName))
-        {
-            return Result.Failure("name must be not null or empty");
-        }
-        
-        Name = newName;
-
-        return Result.Success();
-    }
-
+    
+    public ProductInfo ProductContaining { get; }
+    public IReadOnlyCollection<ModificationInfo> ModificationsContainings { get; }
+    
     public Result SetCooker(Cooker creater)
     {
         if (State == ProductCookState.Cooked)
@@ -47,27 +36,34 @@ public class Product : Entity<Guid>
     }
 
     
-    protected Product(Guid id, string name, Cooker cooker, ProductCookState state, List<ProductContaining> containing)
+    protected Product(
+        Guid id,
+        ProductInfo productInfo,
+        List<ModificationInfo> modifications,
+        Cooker cooker,
+        ProductCookState state)
     {
         Id = id;
-        Name = name;
+        ProductContaining = productInfo;
+        _modification = modifications;
         Creater = cooker;
         State = state;
-        _containing = containing;
     }
 
-    public static Result<Product> Create(Guid id, string name, Cooker cooker, ProductCookState state, List<ProductContaining> containing)
+    public static Result<Product> Create(
+        Guid id,
+        ProductInfo productInfo,
+        List<ModificationInfo> modifications,
+        Cooker cooker,
+        ProductCookState state)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            return Result.Failure<Product>("product name must be");
-        }
 
-        if (containing is null || containing.Count == 0)
+        if (modifications is null)
         {
-            return Result.Failure<Product>("product must have ingridient");
+            return Result.Failure<Product>("modification cant be null");
         }
-        return Result.Success<Product>(new Product(id, name, cooker, state, containing));
+        
+        return Result.Success<Product>(new Product(id, productInfo, modifications, cooker, state));
     }
     
 }
