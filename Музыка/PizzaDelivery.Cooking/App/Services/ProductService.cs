@@ -41,27 +41,6 @@ public class ProductService
        return await _productStore.GetById(id);
     }
 
-    public async Task<Result> ChangeName(Guid id, string name)
-    {
-        var getProductResult = await _productStore.GetById(id);
-
-        if (getProductResult.IsFailure)
-        {
-            return getProductResult;
-        }
-        
-        var product = getProductResult.Value;
-
-        var changeResult = product.ChangeName(name);
-
-        if (changeResult.IsFailure)
-        {
-            return changeResult;
-        }
-
-        return _productStore.SaveChanges(product);
-    }
-
     public async Task<Result> ChangeCreater(Guid id, Cooker cooker)
     {
         var getProductResult = await _productStore.GetById(id);
@@ -103,12 +82,6 @@ public class ProductService
 
         return _productStore.SaveChanges(product);
     }
-
-
-    // public Task<Result> UpdateBaseContaining(Guid id, List<ProductContaining> containings)
-    // {
-    //     
-    // }
 
     public async Task<List<Product>> GetNMostOrdering()
     {
