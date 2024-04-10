@@ -11,7 +11,7 @@ public class Product : Entity<Guid>
     public Cooker? Creater { get; private set; }
     public ProductCookState State { get; private set; }
     
-    public ProductInfo ProductContaining { get; }
+    public ProductInfo BaseProduct { get; }
     public IReadOnlyCollection<ModificationInfo> ModificationsContainings { get; }
     
     public Result SetCooker(Cooker creater)
@@ -38,13 +38,13 @@ public class Product : Entity<Guid>
     
     protected Product(
         Guid id,
-        ProductInfo productInfo,
+        ProductInfo baseProductInfo,
         List<ModificationInfo> modifications,
         Cooker cooker,
         ProductCookState state)
     {
         Id = id;
-        ProductContaining = productInfo;
+        BaseProduct = baseProductInfo;
         _modification = modifications;
         Creater = cooker;
         State = state;
