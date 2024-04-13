@@ -11,4 +11,5 @@ public class Orders
     public Guid RestoraneId { get; set; }
     
     public Restorans Restoran { get; set; }
+    public List<CookingProducts> Elements { get; set; }
 }

@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Configurations\" />
       <Folder Include="Stores\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.2.24128.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.4" />
     </ItemGroup>
 
 </Project>

@@ -6,7 +6,10 @@ public class ModificationContainings
     
     public int ContainingWeight { get; set; }
     
+    
     public Guid ModificationId { get; set; }
     public Guid IngridientId { get; set; }
     
+    public Modifications Modification { get; set; }
+    public Ingridients Ingridient { get; set; }
 }
