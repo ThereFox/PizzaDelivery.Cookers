@@ -1,0 +1,27 @@
+﻿services:
+  cookers:
+    image: cookingService
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+  cookers.database:
+    image: postgres:latest
+    container_name: cookers.database
+    environment:
+      POSTGRES_DB: Cooker
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: default
+    ports:
+      - 5432:5432
+    
+  brocker:
+    image: rabbitmq:3.13.1
+    container_name: orders.brocker
+    hostname: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=therefox
+      - RABBITMQ_DEFAULT_PASS=therefox
+      - RABBITMQ_NODE_PORT=15672
+    ports:
+      - 15672:15672
