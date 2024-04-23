@@ -1,6 +1,6 @@
 namespace DAL.Entitys;
 
-public class ModificationContainings
+public class ModificationContainingsEntitys
 {
     public Guid Id { get; set; }
     
@@ -10,6 +10,6 @@ public class ModificationContainings
     public Guid ModificationId { get; set; }
     public Guid IngridientId { get; set; }
     
-    public Modifications Modification { get; set; }
-    public Ingridients Ingridient { get; set; }
+    public ModificationsEntitys ModificationEntitys { get; set; }
+    public IngridientsEntity IngridientEntity { get; set; }
 }

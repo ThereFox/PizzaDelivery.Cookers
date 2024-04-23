@@ -6,13 +6,13 @@ namespace DAL;
 
 public class ApplicationDBContext : DbContext
 {
-    public DbSet<Restorane> Restoranes { get; private set; }
-    public DbSet<Cookers> Cookers { get; private set; }
-    public DbSet<Ingridients> Ingridients { get; private set; }
-    public DbSet<Modifications> Modifications { get; private set; }
-    public DbSet<Orders> Orders { get; private set; }
-    public DbSet<CookingProducts> OrderedProducts { get; private set; }
-    public DbSet<Products> BaseProducts { get; private set; }
+    public DbSet<RestoransDBEntity> Restoranes { get; private set; }
+    public DbSet<CookersEntity> Cookers { get; private set; }
+    public DbSet<IngridientsEntity> Ingridients { get; private set; }
+    public DbSet<ModificationsEntitys> Modifications { get; private set; }
+    public DbSet<OrdersEntitys> Orders { get; private set; }
+    public DbSet<CookingProductsEntity> OrderedProducts { get; private set; }
+    public DbSet<ProductsTechCardDBEntity> BaseProducts { get; private set; }
     
     public ApplicationDBContext(DbContextOptions<ApplicationDBContext> DBconfiguration) : base(DBconfiguration)
     {

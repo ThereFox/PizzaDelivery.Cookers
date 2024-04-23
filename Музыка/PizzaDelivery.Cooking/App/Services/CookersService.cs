@@ -8,24 +8,21 @@ namespace App.Services;
 
 public class CookersService
 {
-    private readonly IRestoraneStore _restoraneStore;
     private readonly ICookersStore _cookersStore;
-    private readonly IProductStore _productStore;
-
-    public async Task<List<Cooker>> GetAll()
+    protected readonly IRestoraneStore _restoraneStore;
+    protected readonly IProductStore _productStore;
+ 
+    public async Task<List<Cooker>> GetAllByPage(int page, int pageSize)
     {
-        var restorans = await _restoraneStore.GetAll();
-        return restorans.SelectMany(ex => ex.Cookers).ToList();
+        return await _cookersStore.GetAllByPage(page, pageSize);
     }
     public async Task<Result<Cooker>> GetById(Guid id)
     {
-        var getCookerResult = await _cookersStore.GetById(id);
-
-        return getCookerResult;
+        return await _cookersStore.GetById(id);
     }
-    public async Task<List<Cooker>> GetMostBusy()
+    public async Task<List<Cooker>> GetMostBusy(int count)
     {
-        var busiest = await _cookersStore.GetNMostBusy(1);
+        var busiest = await _cookersStore.GetNMostBusy(count);
         return busiest;
     }
     public async Task<Result<List<Product>>> GetCreatedProducts(Guid cookerId)

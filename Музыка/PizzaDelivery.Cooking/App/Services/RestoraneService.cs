@@ -14,9 +14,14 @@ public class RestoraneService
         _store = store;
     }
 
-    public async Task<List<Restorane>> GetAll()
+    public async Task<List<Restorane>> GetAllByPage(int page, int pageSize)
     {
-        var restorans = await _store.GetAll();
+        if (page < 0 || pageSize <= 0)
+        {
+            throw new InvalidCastException("invalid pageInfo");
+        }
+        
+        var restorans = await _store.GetAllByPage(page, pageSize);
         return restorans;
     }
     public async Task<Result> ChangeRestoraneWorkTime(Guid restoraneId, WorkTime workTime)
@@ -78,18 +83,6 @@ public class RestoraneService
 
         return await _store.SaveChanges(restorane);
     }
-    public async Task<Result<List<Order>>> GetOrders(Guid restoraneId)
-    {
-        var checkExisting = await _store.GetById(restoraneId);
-
-        if (checkExisting.IsFailure)
-        {
-            return Result.Failure<List<Order>>(checkExisting.Error);
-        }
-        
-        var orders = await _store.GetCurrentOrders(restoraneId);
-        return Result.Success(orders);
-    }
     public async Task<Result<List<Cooker>>> GetCookers(Guid restoraneId)
     {
         var getRestoraneResult = await _store.GetById(restoraneId);
@@ -103,10 +96,4 @@ public class RestoraneService
 
         return restorane.Cookers.ToList();
     }
-    // public async Task<object> GetNeedToBuy(Guid restoraneId)
-    // {
-    //     var looses = await _store.GetMiddleIngridientLoosesByDay(restoraneId);
-    //     
-    //     return null;
-    // }
 }

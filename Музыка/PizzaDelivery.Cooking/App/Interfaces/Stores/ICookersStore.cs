@@ -6,6 +6,7 @@ namespace App.Interfaces;
 
 public interface ICookersStore
 {
+    public Task<List<Cooker>> GetAllByPage(int page, int pageSize);
     public Task<Result<Cooker>> GetById(Guid id);
     public Task<List<Cooker>> GetNMostBusy(int n);
     public Task<Result> SaveChanges(Cooker cooker);

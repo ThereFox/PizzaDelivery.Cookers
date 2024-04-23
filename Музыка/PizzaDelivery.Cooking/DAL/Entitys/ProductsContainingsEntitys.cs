@@ -1,6 +1,6 @@
 namespace DAL.Entitys;
 
-public class ProductsContainings
+public class ProductsContainingsEntitys
 {
     public Guid Id { get; set; }
     
@@ -9,6 +9,6 @@ public class ProductsContainings
     public Guid ProductId { get; set; }
     public Guid IngridientId { get; set; }
     
-    public Products Product { get; set; }
-    public Ingridients Ingridient { get; set; }
+    public ProductsTechCardDBEntity ProductTechCardDbEntity { get; set; }
+    public IngridientsEntity IngridientEntity { get; set; }
 }

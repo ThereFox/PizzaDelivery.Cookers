@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class OrdersConfiguration : IEntityTypeConfiguration<Orders>
+public class OrdersConfiguration : IEntityTypeConfiguration<OrdersEntitys>
 {
-    public void Configure(EntityTypeBuilder<Orders> builder)
+    public void Configure(EntityTypeBuilder<OrdersEntitys> builder)
     {
         builder
             .HasKey(ex => ex.Id);
@@ -23,7 +23,7 @@ public class OrdersConfiguration : IEntityTypeConfiguration<Orders>
             .IsRequired();
 
         builder
-            .HasOne(ex => ex.Restoran)
+            .HasOne(ex => ex.RestoranDbEntity)
             .WithMany(ex => ex.Orders)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.RestoraneId)
@@ -31,7 +31,7 @@ public class OrdersConfiguration : IEntityTypeConfiguration<Orders>
 
         builder
             .HasMany(ex => ex.Elements)
-            .WithOne(ex => ex.Order)
+            .WithOne(ex => ex.OrderEntitys)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.OrderId)
             .OnDelete(DeleteBehavior.NoAction);

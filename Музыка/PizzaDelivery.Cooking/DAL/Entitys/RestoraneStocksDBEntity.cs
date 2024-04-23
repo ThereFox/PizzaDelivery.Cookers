@@ -1,6 +1,6 @@
 namespace DAL.Entitys;
 
-public class Stocks
+public class RestoraneStocksDBEntity
 {
      public Guid Id { get; set; }
      
@@ -9,6 +9,6 @@ public class Stocks
 
      public int Weight { get; set; }
      
-     public Restorans Restoran { get; set; }
-     public Ingridients Ingridient { get; set; }
+     public RestoransDBEntity Restorane { get; set; }
+     public IngridientsEntity Ingridient { get; set; }
 }

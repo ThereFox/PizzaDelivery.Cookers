@@ -5,26 +5,37 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class CookerConfiguration : IEntityTypeConfiguration<Cookers>
+public class CookerConfiguration : IEntityTypeConfiguration<CookersEntity>
 {
-    public void Configure(EntityTypeBuilder<Cookers> builder)
+    public void Configure(EntityTypeBuilder<CookersEntity> builder)
     {
         builder
             .HasKey(ex => ex.Id);
 
         builder
-            .Property(ex => ex.Name);
+            .Property(ex => ex.FirstName)
+            .IsRequired();
+        
         
         builder
-            .HasOne(ex => ex.Restoran)
+            .Property(ex => ex.MiddleName)
+            .IsRequired();
+        
+        
+        builder
+            .Property(ex => ex.LastName)
+            .IsRequired();
+        
+        builder
+            .HasOne(ex => ex.WorkPlase)
             .WithMany(ex => ex.Workers)
             .HasPrincipalKey(ex => ex.Id)
-            .HasForeignKey(ex => ex.RestoraneId)
+            .HasForeignKey(ex => ex.WorkPlaseId)
             .OnDelete(DeleteBehavior.NoAction);
         
         builder
-            .HasMany(ex => ex.CookingProducts)
-            .WithOne(ex => ex.Cooker)
+            .HasMany(ex => ex.CookedProducts)
+            .WithOne(ex => ex.CookerEntity)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.CookerId)
             .OnDelete(DeleteBehavior.SetNull);

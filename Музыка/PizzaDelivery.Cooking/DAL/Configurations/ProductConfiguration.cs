@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class ProductConfiguration : IEntityTypeConfiguration<Products>
+public class ProductConfiguration : IEntityTypeConfiguration<ProductsTechCardDBEntity>
 {
-    public void Configure(EntityTypeBuilder<Products> builder)
+    public void Configure(EntityTypeBuilder<ProductsTechCardDBEntity> builder)
     {
         builder
             .HasKey(ex => ex.Id);
@@ -16,14 +16,14 @@ public class ProductConfiguration : IEntityTypeConfiguration<Products>
             .IsRequired();
 
         builder.HasMany(ex => ex.Cookings)
-            .WithOne(ex => ex.BaseProduct)
+            .WithOne(ex => ex.BaseProductTechCardDbEntity)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.BaseProductId)
             .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasMany(ex => ex.IngridientContaining)
-            .WithOne(ex => ex.Product)
+            .WithOne(ex => ex.ProductTechCardDbEntity)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.ProductId)
             .OnDelete(DeleteBehavior.NoAction);

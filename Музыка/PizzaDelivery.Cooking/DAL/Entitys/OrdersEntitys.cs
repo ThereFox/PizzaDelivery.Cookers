@@ -1,6 +1,6 @@
 namespace DAL.Entitys;
 
-public class Orders
+public class OrdersEntitys
 {
     public Guid Id { get; set; }
     
@@ -10,6 +10,6 @@ public class Orders
     
     public Guid RestoraneId { get; set; }
     
-    public Restorans Restoran { get; set; }
-    public List<CookingProducts> Elements { get; set; }
+    public RestoransDBEntity RestoranDbEntity { get; set; }
+    public List<CookingProductsEntity> Elements { get; set; }
 }

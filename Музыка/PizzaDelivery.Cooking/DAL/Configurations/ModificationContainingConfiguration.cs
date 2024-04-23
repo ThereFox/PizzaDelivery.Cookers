@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class ModificationContainingConfiguration : IEntityTypeConfiguration<ModificationContainings>
+public class ModificationContainingConfiguration : IEntityTypeConfiguration<ModificationContainingsEntitys>
 {
-    public void Configure(EntityTypeBuilder<ModificationContainings> builder)
+    public void Configure(EntityTypeBuilder<ModificationContainingsEntitys> builder)
     {
         builder
             .HasKey(ex => ex.Id);
@@ -20,14 +20,14 @@ public class ModificationContainingConfiguration : IEntityTypeConfiguration<Modi
             .IsRequired();
 
         builder
-            .HasOne(ex => ex.Modification)
+            .HasOne(ex => ex.ModificationEntitys)
             .WithMany(ex => ex.ContainingIngridients)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.ModificationId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder
-            .HasOne(ex => ex.Ingridient)
+            .HasOne(ex => ex.IngridientEntity)
             .WithMany(ex => ex.ContainingInModifications)
             .HasForeignKey(ex => ex.IngridientId)
             .HasPrincipalKey(ex => ex.Id)

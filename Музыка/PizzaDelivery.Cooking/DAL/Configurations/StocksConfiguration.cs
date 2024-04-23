@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class StocksConfiguration : IEntityTypeConfiguration<Stocks>
+public class StocksConfiguration : IEntityTypeConfiguration<RestoraneStocksDBEntity>
 {
-    public void Configure(EntityTypeBuilder<Stocks> builder)
+    public void Configure(EntityTypeBuilder<RestoraneStocksDBEntity> builder)
     {
         builder
             .HasKey(ex => ex.Id);
@@ -16,7 +16,7 @@ public class StocksConfiguration : IEntityTypeConfiguration<Stocks>
             .IsRequired();
 
         builder
-            .HasOne(ex => ex.Restoran)
+            .HasOne(ex => ex.Restorane)
             .WithMany(ex => ex.StocksList)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.RestoraneId)

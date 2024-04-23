@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Configurations;
 
-public class IngridientsConfiguration : IEntityTypeConfiguration<Ingridients>
+public class IngridientsConfiguration : IEntityTypeConfiguration<IngridientsEntity>
 {
-    public void Configure(EntityTypeBuilder<Ingridients> builder)
+    public void Configure(EntityTypeBuilder<IngridientsEntity> builder)
     {
         builder
             .HasKey(ex => ex.Id);
@@ -16,14 +16,14 @@ public class IngridientsConfiguration : IEntityTypeConfiguration<Ingridients>
 
         builder
             .HasMany(ex => ex.ContainingInModifications)
-            .WithOne(ex => ex.Ingridient)
+            .WithOne(ex => ex.IngridientEntity)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.IngridientId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder
             .HasMany(ex => ex.ContainingInProducts)
-            .WithOne(ex => ex.Ingridient)
+            .WithOne(ex => ex.IngridientEntity)
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.IngridientId)
             .OnDelete(DeleteBehavior.SetNull);

@@ -9,14 +9,14 @@ public static class DI
 {
     public static IServiceCollection AddDAL(this IServiceCollection services, Action<DbContextOptionsBuilder> DBconfiguration)
     {
-        services.AddDbContext<ApplicationDBContext>(DBconfiguration, ServiceLifetime.Singleton);
+        services.AddDbContext<ApplicationDBContext>(DBconfiguration, ServiceLifetime.Transient);
 
-        services.AddSingleton<IContainingStore, ContainingStores>();
-        services.AddSingleton<ICookersStore, CookersStore>();
-        services.AddSingleton<IIngridientsStore, IngridientsStore>();
-        services.AddSingleton<IOrderStore, OrdersStore>();
-        services.AddSingleton<IProductStore, ProductsStore>();
-        services.AddSingleton<IRestoraneStore, RestoranesStore>();
+        services.AddTransient<IProductTechnologyCardStore, ProductTechnologyCardStore>();
+        services.AddTransient<ICookersStore, CookersStore>();
+        services.AddTransient<IIngridientsStore, IngridientsStore>();
+        services.AddTransient<IOrderStore, OrdersStore>();
+        services.AddTransient<IProductStore, ProductsStore>();
+        services.AddTransient<IRestoraneStore, RestoranesStore>();
 
         return services;
     }

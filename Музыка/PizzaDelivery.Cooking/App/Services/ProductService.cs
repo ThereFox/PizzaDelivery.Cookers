@@ -10,31 +10,30 @@ public class ProductService
 {
     private readonly IProductStore _productStore;
     private readonly IOrderStore _orderStore;
-    private readonly IRestoraneStore _restoraneStore;
     
-    public async Task<Result<List<Product>>> GetActiveInRestorane(Guid restoraneId)
-    {
-        var restoraneById = await _restoraneStore.GetById(restoraneId);
-
-        if (restoraneById.IsFailure)
-        {
-            return Result.Failure<List<Product>>("dont have restorane with this id");
-        }
-        
-        var orders = await _restoraneStore.GetCurrentOrders(restoraneId);
-
-        if (orders.Count == 0)
-        {
-            return Result.Success<List<Product>>(new List<Product>());
-        }
-        
-        var activeProductsInRestorant =
-            orders.SelectMany(ex => ex.Composition.Where(ex => ex.State == ProductCookState.InCook))
-                .ToList();
-
-        return Result.Success<List<Product>>(activeProductsInRestorant);
-
-    }
+    // public async Task<Result<List<Product>>> GetActiveInRestorane(Guid restoraneId)
+    // {
+    //     var restoraneById = await _restoraneStore.GetById(restoraneId);
+    //
+    //     if (restoraneById.IsFailure)
+    //     {
+    //         return Result.Failure<List<Product>>("dont have restorane with this id");
+    //     }
+    //     
+    //     var orders = await _restoraneStore.GetCurrentOrders(restoraneId);
+    //
+    //     if (orders.Count == 0)
+    //     {
+    //         return Result.Success<List<Product>>(new List<Product>());
+    //     }
+    //     
+    //     var activeProductsInRestorant =
+    //         orders.SelectMany(ex => ex.Composition.Where(ex => ex.State == ProductCookState.InCook))
+    //             .ToList();
+    //
+    //     return Result.Success<List<Product>>(activeProductsInRestorant);
+    //
+    // }
 
     public async Task<Result<Product>> GetById(Guid id)
     {

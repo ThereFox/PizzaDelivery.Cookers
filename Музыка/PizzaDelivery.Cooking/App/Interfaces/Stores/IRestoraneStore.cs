@@ -6,11 +6,10 @@ namespace App.Interfaces;
 
 public interface IRestoraneStore
 {
-    public Task<List<Restorane>> GetAll();
+    public Task<List<Restorane>> GetAllByPage(int page, int pageSize);
     public Task<Result<Restorane>> GetById(Guid restoraneId);
-    public Task<List<Order>> GetCurrentOrders(Guid restoraneId);
 
-    public Task<RestoraneStocks> GetMiddleIngridientLoosesByDay(Guid restoraneId);
-    
+    public Task<Result> Create(Restorane restorane);
+    public Task<Result> Delete(Guid id);
     public Task<Result> SaveChanges(Restorane restorane);
 }
